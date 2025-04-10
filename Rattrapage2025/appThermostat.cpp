@@ -8,6 +8,12 @@
 
 #include "appThermostat.hpp"
 
+
+ThermostatApp::ThermostatApp(Chaudiere *pChaudiere):pChaudiere(pChaudiere)
+{
+
+}
+
 //----------------------------------------------------------------------
 void	ThermostatApp::Init(){
 

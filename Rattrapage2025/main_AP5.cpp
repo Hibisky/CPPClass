@@ -30,13 +30,12 @@ void capteurTempp(std::stop_token st)
     {
         cpt.recupererTemp();    
         double randomTemp = cpt.getTemp();//prendre une mesure
-        std::cout <<"Temperature Dummy: " << randomTemp << " degres Celsius" << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(100));//tempo par ce qu eca fait plaisir 
     }
     std::cout << "Fin de la prise de temperature " << std::endl;
 }
 
-void chaudiereVie(std::stop_source source,std::stop_token st)
+void processing(std::stop_source source,std::stop_token st)
 {
     DummyChaudiere ch = DummyChaudiere();
     ch.getStatus();
@@ -59,7 +58,7 @@ int main(){
 
 	
 	//creation d'un thread pour la Chaudiere
-	std::jthread chaudiere (chaudiereVie,std::move(stopSource), stopToken); 
+	std::jthread chaudiere (processing,std::move(stopSource), stopToken); 
 	
 	//creation d'un thread pour la temperature
 	std::jthread capTemp1 (capteurTempp,stopToken); 

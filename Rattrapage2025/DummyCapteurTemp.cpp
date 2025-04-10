@@ -17,7 +17,7 @@
 // Random generators
 std::random_device rd;  
 std::mt19937 gen(rd()); 
-std::uniform_int_distribution<int> distrib(0, 20);
+std::uniform_real_distribution<double> distrib(0.0, 20.0); // std::uniform_int_distribution<int> 
 
 double DummyCapteurTemp::temperatureAmbiante() {
     if (stockValue.empty()) return 0.0; // sécurité : éviter une division par zéro
@@ -58,6 +58,7 @@ bool DummyCapteurTemp::setTemp(double temperatureIn)
         if ((temperatureIn >= temperature - delta) && (temperatureIn <= temperature + delta))
         {
             temperature = temperatureIn;
+            std::cout <<"Temperature Dummy: " << temperature << " degres Celsius" << std::endl;
             //std::cout << " new valeur de temperature ok" << std::endl;
         }
         else 

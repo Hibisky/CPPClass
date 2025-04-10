@@ -47,6 +47,9 @@ class	ThermostatApp:public Application{
 		ThermostatApp() = delete;											/**< Deleted default Ctor		*/
 		virtual ~ThermostatApp() = default;
 		
+
+		ThermostatApp(Chaudiere *pChaudiere);
+
 		/**
 		 * 	Init function
 		 * 		This function : 
@@ -69,6 +72,8 @@ class	ThermostatApp:public Application{
 
     	DummyCapteurTemp capteur;
     	Chaudiere *pChaudiere = nullptr; // Corrected declaration syntax
+		double hysteresis;
+		double consigne;
     	// Mutex et condition_variable pour synchroniser les threads
     	std::mutex temperatureAmbiante;
     	std::condition_variable cv;

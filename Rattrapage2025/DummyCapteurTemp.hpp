@@ -75,7 +75,7 @@ class DummyCapteurTemp: public CapteurTemp{
         
 	private:
 	    double temperature; //temperature d'initialisation du capteur
-	    const double delta = 2; // difference acceptée entre 2 valeurs successives
+	    const double delta = 2.0; // difference acceptée entre 2 valeurs successives
 	    std::vector<double> stockValue;
 	    int mesure = -1;
 	    double tMin = getTemp() - delta;
