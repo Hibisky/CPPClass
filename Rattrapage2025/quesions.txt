@@ -1,0 +1,15 @@
+differences entre thread et jthread?
+
+differences entre semaphore et mutex
+
+comment fonctionne unique_lock() et le wait(lock)
+
+Exercice Thread avec les mutex
+    creer 2 thread qui cherchent une valeur dans un vecteur
+    le premier qui trouve arrete l'autre
+
+Exercice Thread avec RequestStop
+    2 thread recupere une valeur random et font l edecompte jusqu'à zero 
+    le premier qui atteint 0 arrete l'autre
+
+faire AP5 et AP6
