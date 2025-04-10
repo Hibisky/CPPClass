@@ -41,6 +41,8 @@ class Chaudiere{
 		Chaudiere() = default;					/**<	Defaulted default Ctor	*/
 		virtual ~Chaudiere() = default;			/**<	Defaulted Dtor			*/
 		
+		Chaudiere(Status st);
+		
 		/**
 		*	getter for the status field
 		* 	

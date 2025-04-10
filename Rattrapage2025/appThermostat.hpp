@@ -13,6 +13,8 @@
 #include <array>
 #include <mutex>
 
+#include "DummyCapteurTemp.hpp"
+#include "Chaudiere.hpp"
 
 //----------------------------------------------------------------------
 /**
@@ -63,7 +65,14 @@ class	ThermostatApp:public Application{
 		 */
 		virtual void	Run();
 	
-	
+	private:
+
+    	DummyCapteurTemp capteur;
+    	Chaudiere *pChaudiere = nullptr; // Corrected declaration syntax
+    	// Mutex et condition_variable pour synchroniser les threads
+    	std::mutex temperatureAmbiante;
+    	std::condition_variable cv;
+
 };
 
 #endif	/* __APP_THERMOSTAT_H__ */

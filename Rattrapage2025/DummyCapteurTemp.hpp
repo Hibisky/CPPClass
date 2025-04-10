@@ -27,22 +27,28 @@ class DummyCapteurTemp: public CapteurTemp{
 	public:
 		DummyCapteurTemp() = default;
 		virtual ~DummyCapteurTemp() = default;
-		
+		DummyCapteurTemp(double Tmin, double Tmax, double temp, double delta);
 		double temperatureAmbiante();
-		virtual double 	getTemp(){return this->temperature;};
-		double getValueVector();
-		bool setTemp(double temperature);
 		void recupererTemp();
+		void stockerValue(double valueAstocker);
+		double getValueVector();
+
+		virtual double 	getTemp(){return this->temperature;};
+		bool setTemp(double temperature);
+
         void setMesure(int value);
         int getMesure();
+
+		double getDelta();
+		//Pas de set car delta est en read only
         
 	private:
 	    double temperature; //temperature d'initialisation du capteur
 	    const double delta = 2; // difference acceptée entre 2 valeurs successives
 	    std::vector<double> stockValue;
 	    int mesure = -1;
-	    double mintemp = getTemp() - delta;
-	    double maxtemp = getTemp() + delta;
+	    double tMin = getTemp() - delta;
+	    double tMax = getTemp() + delta;
 	
 };
 

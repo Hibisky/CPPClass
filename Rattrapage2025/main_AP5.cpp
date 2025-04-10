@@ -31,20 +31,24 @@ void capteurTempp(std::stop_token st)
         cpt.recupererTemp();    
         double randomTemp = cpt.getTemp();//prendre une mesure
         std::cout <<"Temperature Dummy: " << randomTemp << " degres Celsius" << std::endl;
-        //faire la difference etre la valeur et la consigne
-        //la stocker
-        //faire la moyenne des 5 valeurs 
-        
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));//tempo par ce qu eca fait plaisir 
     }
     std::cout << "Fin de la prise de temperature " << std::endl;
 }
 
-void chaudiereVie(std::stop_source source)
+void chaudiereVie(std::stop_source source,std::stop_token st)
 {
     DummyChaudiere ch = DummyChaudiere();
     ch.getStatus();
     std::cout << "Chaudiere en marche " << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+    // while(!st.stop_requested() )
+    // {
+    //   //fait la moyenne des valeur de temperature pour un capteur 
+    //   //faire la difference etre la valeur de la temperature ambiante et la consigne
+    //   //std::unique_lock lock()//permet de privatiser la ressource ici la chaudiere 
+    // }
     source.request_stop();
 }
 int main(){
@@ -55,7 +59,7 @@ int main(){
 
 	
 	//creation d'un thread pour la Chaudiere
-	std::jthread chaudiere (chaudiereVie,std::move(stopSource)); 
+	std::jthread chaudiere (chaudiereVie,std::move(stopSource), stopToken); 
 	
 	//creation d'un thread pour la temperature
 	std::jthread capTemp1 (capteurTempp,stopToken); 
