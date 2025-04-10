@@ -49,7 +49,7 @@ void chaudiereVie(std::stop_source source,std::stop_token st)
     //   //faire la difference etre la valeur de la temperature ambiante et la consigne
     //   //std::unique_lock lock()//permet de privatiser la ressource ici la chaudiere 
     // }
-    source.request_stop();
+    //source.request_stop();
 }
 int main(){
     

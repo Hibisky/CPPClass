@@ -19,15 +19,11 @@ std::random_device rd;
 std::mt19937 gen(rd()); 
 std::uniform_int_distribution<int> distrib(0, 20);
 
-double DummyCapteurTemp::temperatureAmbiante(){
-    double somValue = 0; 
-    for (int i=0; i < stockValue.max_size(); ++i)
-    {
-        double randomTemp = stockValue.front()+ i;
-        somValue += randomTemp;
-        std::accumulate(stockerValue.front, stockerValue.end);
-    }
-    return somValue;
+double DummyCapteurTemp::temperatureAmbiante() {
+    if (stockValue.empty()) return 0.0; // sécurité : éviter une division par zéro
+
+    double somValue = std::accumulate(stockValue.begin(), stockValue.end(), 0.0);
+    return somValue / static_cast<double>(stockValue.size());
 }
 
 //----------------------------------------------------------------------
@@ -38,21 +34,19 @@ void DummyCapteurTemp::recupererTemp()
     double validTemp = setTemp(randomtemp); //On s'assure qu'elle soit realiste
     stockerValue(validTemp);
 }
+
 //----------------------------------------------------------------------
 
 void DummyCapteurTemp::stockerValue(double valueAstocker)
 {
-    if (stockValue.size() <= 5)
+    //On veut max une moyenne sur 5 valeurs de temp
+    if (stockValue.size() >= 5) 
     {
-        std::cout << " stockValue.size() " << stockValue.size() << std::endl;
-        stockValue.push_back(valueAstocker);// stocker la valeur dans le vecteur 
+        // Supprimer l'élément le plus ancien (le premier)
+        stockValue.erase(stockValue.begin());
     }
-    else {
-        //supprimer l'element le plus ancien (place 1)
-        //avancer tous les elements d'une case
-    }
+    stockValue.push_back(valueAstocker);//on ajoute  la valeur a la fin du vecteur
 }
-
 
 //----------------------------------------------------------------------
 
@@ -78,17 +72,17 @@ bool DummyCapteurTemp::setTemp(double temperatureIn)
 
 //----------------------------------------------------------------------
 
-double DummyCapteurTemp::getValueVector(){return 1;}
+// std::vector<double> DummyCapteurTemp::getValueVector() {
+//     if (!stockValue.empty()) {
+//         return stockValue; // la dernière valeur ajoutée
+//     }
+//     return EXIT_FAILURE; //vecteur vide donc pas de valeurs
+// }
 
 //----------------------------------------------------------------------
 
 void DummyCapteurTemp::setMesure(int newMesure){
     mesure = newMesure;
 }
-//----------------------------------------------------------------------
-int DummyCapteurTemp::getMesure(){
-    return mesure;
-}
-//----------------------------------------------------------------------
 
-double DummyCapteurTemp::getDelta(){return delta;}
+//----------------------------------------------------------------------
