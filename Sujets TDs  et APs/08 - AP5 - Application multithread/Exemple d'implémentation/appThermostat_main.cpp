@@ -50,7 +50,7 @@ int main(){
 		std::println("Exception catched OK\n");
 		Ok = true;
 	}
-	assert (Ok == true);
+	assert (Ok == true);//return -1 mais pas d assert plutortt separer 
 
 	Ok = false;
 

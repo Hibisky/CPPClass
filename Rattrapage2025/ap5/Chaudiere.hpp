@@ -86,7 +86,7 @@ class DummyChaudiere : public Chaudiere{
 		* 	@throw	HeaterAlreadyONexception	if the boiler is already on
 		* 
 		*/	
-		virtual	void 	setON();
+		void 	setON() override ;
 		
 		/**
 		*	setOFF() function
@@ -95,7 +95,7 @@ class DummyChaudiere : public Chaudiere{
 		* 	@throw	HeaterAlreadyOFFexception	if the boiler is already off
 		* 
 		*/	
-		virtual void 	setOFF();
+		virtual void 	setOFF() override;
 	
 };
 //----------------------------------------------------------------------

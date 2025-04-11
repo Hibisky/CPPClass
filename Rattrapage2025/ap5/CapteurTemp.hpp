@@ -27,8 +27,6 @@ class CapteurTemp{
 		
 		virtual double 	getTemp() = 0;
 
-	private:
-		const int consigne = 19;//On souhaite que la salle soit a 19 degres	
 };
 
 

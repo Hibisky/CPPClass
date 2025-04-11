@@ -50,6 +50,7 @@ void processing(std::stop_source source,std::stop_token st)
     // }
     //source.request_stop();
 }
+
 int main(){
     
   //variables qui permettent l'interruption des threads

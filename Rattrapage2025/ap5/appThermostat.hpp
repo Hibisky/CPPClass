@@ -77,6 +77,8 @@ class	ThermostatApp:public Application{
     	// Mutex et condition_variable pour synchroniser les threads
     	std::mutex temperatureAmbiante;
     	std::condition_variable cv;
+		const int consigne = 19;//On souhaite que la salle soit a 19 degres	
+
 
 };
 
