@@ -8,7 +8,7 @@
  */
 
 #include "NetworkCapteurTemp.hpp"
-
+#include <format>
 
 NetworkCapteurTemp::NetworkCapteurTemp(uint16_t port):udpPort{port}{
 
@@ -23,8 +23,8 @@ int sockfd;
 sockaddr_in servaddr, cliaddr;
 char buffer[MAXLINE];
 
-//std::clog << "UDP server starting (port : " << static_cast<int>(this->getudpPort()) << ")\n"; 
-std::println(std::clog,"UDP Server starting (port : {0:d})",static_cast<int>(this->getudpPort()));
+std::clog << "UDP server starting (port : " << static_cast<int>(this->getudpPort()) << ")\n"; 
+//std::println(std::clog,"UDP Server starting (port : {0:d})",static_cast<int>(this->getudpPort()));
 // Creating socket file descriptor
 if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) throw NetworkException("Error while creating socket.");
 
@@ -41,17 +41,17 @@ while(true){
     n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, ( struct sockaddr *) &cliaddr, &len);
     buffer[n] = '\0';
     std::string stmp{buffer};
-    //std::cout << "Message received = " << stmp << std::endl;
-    std::println("Message received = {0:}",stmp);
+    std::cout << "Message received = " << stmp << std::endl;
+    //std::println("Message received = {0:}",stmp);
     try{
         this->setRawTemp(std::stoi(stmp));
-        std::println(std::clog ,"New temperature received. OK");
+        //std::println(std::clog ,"New temperature received. OK");
     }
     catch(const std::invalid_argument& e){
-        std::println(std::cerr, "Received value is not an integer.");
+        //std::println(std::cerr, "Received value is not an integer.");
     }
     catch(const std::out_of_range& e){
-        std::println(std::cerr,"Received value is out of range.");
+        //std::println(std::cerr,"Received value is out of range.");
     }
 
 

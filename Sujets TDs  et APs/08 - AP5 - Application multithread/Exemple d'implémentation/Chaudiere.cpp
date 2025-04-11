@@ -12,7 +12,8 @@
 void 	DummyChaudiere::setON(){
 	if (this->getStatus() == Status::OFF){
 		this->setStatus(Status::ON);
-		std::println(std::clog ,"Chaudière ON");
+		std::cout << "Chaudière ON" <<std::endl;
+		//std::println(std::clog ,"Chaudière ON");
 	}
 	else{
 		throw BoilerAlreadyONexception{};
@@ -22,7 +23,8 @@ void 	DummyChaudiere::setON(){
 void 	DummyChaudiere::setOFF(){
 	if (this->getStatus() == Status::ON){
 		this->setStatus(Status::OFF);
-		std::println(std::clog ,"Chaudière OFF");
+		std::cout << "Chaudière OFF" <<std::endl;
+		//std::println(std::clog ,"Chaudière OFF");
 	}
 	else{
 		throw BoilerAlreadyOFFexception{};

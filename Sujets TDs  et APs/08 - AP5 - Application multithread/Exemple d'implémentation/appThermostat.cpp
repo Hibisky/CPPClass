@@ -40,15 +40,15 @@ void ThermostatApp::_processingThread(){
 	while(true){
 		std::this_thread::sleep_for(process_delay);
 		actualTemp = this->getTemp();
-		//std::clog << "Actual temperature = " << actualTemp << ". Setpoint is " << this->getConsigne() << std::endl;
-		std::println(std::clog,"Actual temperature = {0:0.1f}°C. Setpoint is {1:0.1f}.",actualTemp,this->getConsigne());
+		std::clog << "Actual temperature = " << actualTemp << ". Setpoint is " << this->getConsigne() << std::endl;
+		//std::println(std::clog,"Actual temperature = {0:0.1f}°C. Setpoint is {1:0.1f}.",actualTemp,this->getConsigne());
 
 		if (actualTemp > (this->getConsigne() + this->getHysteresis()) ){
 			try{
 				this->pChaudiere->setOFF();
 				}
 			catch(const std::exception& e){
-				std::println(std::clog,"Chaudiere already OFF.");
+				//std::println(std::clog,"Chaudiere already OFF.");
 			}
 
 		}
@@ -57,11 +57,11 @@ void ThermostatApp::_processingThread(){
 				this->pChaudiere->setON();
 				}
 			catch(const std::exception& e){
-				std::println(std::clog,"Chaudiere already ON.");
+				//std::println(std::clog,"Chaudiere already ON.");
 			}
 		}
 		else{
-			std::println(std::clog, "No action required...");
+			//std::println(std::clog, "No action required...");
 		}
 
 

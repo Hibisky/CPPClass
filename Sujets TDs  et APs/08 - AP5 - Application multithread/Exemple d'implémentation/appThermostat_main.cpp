@@ -5,9 +5,8 @@
  * 	@date		09/2024
  * 
  */
-#include <print>
 #include <memory>
-
+#include <format>
 #include "appThermostat.hpp"
 #include "Chaudiere.hpp"
 #include "DummyCapteurTemp.hpp"
@@ -30,14 +29,14 @@ int main(){
 
 	// Test Ctor
 	DummyChaudiere	myBoiler{};
-	//std::cout << "Etat Chaudière après construction : " << static_cast<int>(myBoiler.getStatus())  << " - Should be 1\n";		
-	std::println ("Etat Chaudière après construction : {0:d} - Should be 1",static_cast<int>(myBoiler.getStatus()));
+	std::cout << "Etat Chaudière après construction : " << static_cast<int>(myBoiler.getStatus())  << " - Should be 1\n";		
+	//std::println ("Etat Chaudière après construction : {0:d} - Should be 1",static_cast<int>(myBoiler.getStatus()));
 	assert(myBoiler.getStatus() == Chaudiere::Status::OFF);
 
 	// Test SetON - OK
 	myBoiler.setON();
-	//std::cout << "Etat Chaudière après setON : " << static_cast<int>(myBoiler.getStatus())  << " - Should be 0\n";	
-	std::println ("Etat Chaudière après construction : {0:d} - Should be 0",static_cast<int>(myBoiler.getStatus()));	
+	std::cout << "Etat Chaudière après setON : " << static_cast<int>(myBoiler.getStatus())  << " - Should be 0\n";	
+	//std::println ("Etat Chaudière après construction : {0:d} - Should be 0",static_cast<int>(myBoiler.getStatus()));	
 	assert(myBoiler.getStatus() == Chaudiere::Status::ON);
 
 	// Test SetON - should throw an exception
@@ -56,8 +55,8 @@ int main(){
 
 	// Test SetOFF - OK
 	myBoiler.setOFF();
-	//std::cout << "Etat Chaudière après setOFF : " << static_cast<int>(myBoiler.getStatus())  << " - Should be 1\n";	
-	std::println ("Etat Chaudière après construction : {0:d} - Should be 1",static_cast<int>(myBoiler.getStatus()));	
+	std::cout << "Etat Chaudière après setOFF : " << static_cast<int>(myBoiler.getStatus())  << " - Should be 1\n";	
+	//std::println ("Etat Chaudière après construction : {0:d} - Should be 1",static_cast<int>(myBoiler.getStatus()));	
 	assert(myBoiler.getStatus() == Chaudiere::Status::OFF);
 	
 	// Test SetOFF - should throw an exception
@@ -116,8 +115,8 @@ int main(){
 //--------------------------- Application ------------------------------------
 #ifdef	APPLICATION
 int main(){
-	std::println("--- Gestion chaudière - main app - Starting---");
-
+	//std::println("--- Gestion chaudière - main app - Starting---");
+	std::cout << "--- Gestion chaudière - main app - Starting---" << std::endl;
 	std::unique_ptr<DummyChaudiere>	pBoiler = std::make_unique<DummyChaudiere>();	/**<  Création Objet Chaudiere avec unique_ptr */
 
 	ThermostatApp	myApp(pBoiler.get());
